@@ -1,0 +1,15 @@
+.Item {
+    color: white;
+
+}
+
+.Item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 60px;
+}
+
+.Item2{
+    display: flex;
+    align-items: center;
+}
