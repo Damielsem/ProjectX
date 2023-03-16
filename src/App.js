@@ -8,7 +8,8 @@ import Profile from "./components/Profile/Profile";
 import News from "./components/Dialogs/News/News";
 import Music from "./components/Dialogs/Music/Music";
 import Settings from "./components/Dialogs/Settings/Settings";
-const App = () => {
+
+const App = (props) => {
   return (
     <BrowserRouter>
       <div className="app-wrapper">
@@ -16,20 +17,20 @@ const App = () => {
         <Nav />
         <div className="app-wrapper-content">
           <Routes>
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/dialogs/*" element={<Dialogs />} />
+            <Route
+              path="/profile"
+              element={<Profile postsData={props.postsData} />}
+            />
+            <Route
+              path="/dialogs/*"
+              element={<Dialogs state={props.state.dialogsPage} />}
+            />
             <Route path="/news" element={<News />} />
             <Route path="/music" element={<Music />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>
         </div>
-
-        <div>
-          <img
-            className="background"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGpbDLejG39zSQXPqhmQ1RRbkw71W2lRU9Rw&usqp=CAU"
-          />
-        </div>
+        <div></div>
       </div>
     </BrowserRouter>
   );

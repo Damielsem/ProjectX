@@ -1,44 +1,30 @@
 import React from "react";
 import classes from "./Dialogs.module.css";
-import { NavLink } from "react-router-dom";
+import DialogsItems from "./DialogsItems/DialogsItems";
+import Message from "./Message/Message";
 
-const DialogsItems = (props) => {
-  return (
-    <div className={classes.dialogs + " " + classes.active}>
-      <NavLink to={"/dialogs/*" + props.id}>{props.name}</NavLink>
-    </div>
-  );
-};
-
-const Message = (props) => {
-  return <div className={classes.dialogs}>{props.message}</div>;
-};
-const Dialogs = () => {
-  let dialogsData = [
-    { id: 1, name: "Samael" },
-    { id: 2, name: "Dea" },
-    { id: 3, name: "Maks" },
-    { id: 4, name: "Father" },
-    { id: 5, name: "Mother" },
-  ];
-
-  let messagesData = [
-    { id: 1, message: "My fear my honest" },
-    { id: 2, message: "My love" },
-    { id: 3, message: "Yo man" },
-  ];
-
-  let dialogElements = dialogsData.map((dialogs) => (
+const Dialogs = (props) => {
+  const dialogElements = props.state.dialogsData.map((dialogs) => (
     <DialogsItems name={dialogs.name} id={dialogs.id} />
   ));
-  let messagesElements = messagesData.map((message) => (
+  const messagesElements = props.state.messagesData.map((message) => (
     <Message message={message.message} />
   ));
+
+  const newPostElement = React.createRef();
+  const addPost = () => {
+    const text = newPostElement.current.value;
+    alert(text);
+  };
 
   return (
     <div className={classes.dialogs}>
       <div className={classes.dialogsItems}>{dialogElements}</div>
-      <div className={classes.messages}>{messagesElements}</div>
+      <div>
+        <div className={classes.messages}>{messagesElements}</div>
+        <textarea ref={newPostElement}></textarea>
+        <button onClick={addPost}>Add post</button>
+      </div>
     </div>
   );
 };

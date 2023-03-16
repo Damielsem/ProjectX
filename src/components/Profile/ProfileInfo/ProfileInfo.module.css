@@ -3,3 +3,14 @@
     padding: 10px
 }
 
+.maks {
+    display: flex;
+    width: 80vw;
+    justify-content: center;
+}
+
+.background {
+    width: 600px;
+    height: 200px;
+    object-fit: fill;
+}
