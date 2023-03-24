@@ -2,16 +2,17 @@ import React from "react";
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
-const MyPosts = () => {
-  const posts = [
-    { message: "Hey, It's me Mario", likes: 7 },
-    { message: "It's my Love", likes: 69 },
-  ];
-
+const MyPosts = (props) => {
   const newPostElement = React.createRef();
   const addPost = () => {
     const text = newPostElement.current.value;
-    alert(text);
+    props.addPost(text);
+    props.updateNewPostText("");
+  };
+
+  const onPostChange = () => {
+    const text = newPostElement.current.value;
+    props.updateNewPostText(text);
   };
 
   return (
@@ -19,14 +20,18 @@ const MyPosts = () => {
       <h3> My posts</h3>
       <div>
         <div>
-          <textarea ref={newPostElement}></textarea>
+          <textarea
+            onChange={onPostChange}
+            ref={newPostElement}
+            value={props.newPostText}
+          />
         </div>
         <div>
           <button onClick={addPost}>Add post</button>
         </div>
       </div>
       <div className={classes.Post}>
-        {posts.map((post) => {
+        {props.state.map((post) => {
           return <Post message={post.message} likes={post.likes} key={post} />;
         })}
       </div>
